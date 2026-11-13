@@ -1,2 +1,4 @@
 __pycache__
 decks
+.pytest_cache
+.venv
