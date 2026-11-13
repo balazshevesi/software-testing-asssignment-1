@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from deck import Deck
 from deck_loader import DeckLoader
 
 
@@ -32,3 +33,30 @@ def test_list_decks_returns_deck_names(tmp_path, monkeypatch):
     loader = DeckLoader()
 
     assert loader.list_decks() == ["biology"]
+
+
+def test_load_empty_deck(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    Path("decks").mkdir()
+    Path("decks/biology.csv").write_text("question,answer\n")
+    loader = DeckLoader()
+
+    deck = loader.load_deck("biology")
+
+    assert isinstance(deck, Deck)
+    assert deck.name == "biology"
+    assert deck.cards == []
+
+
+def test_load_deck_with_one_flashcard(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    Path("decks").mkdir()
+    Path("decks/biology.csv").write_text("question,answer\nWhat is DNA?,Genetic material\n")
+    loader = DeckLoader()
+
+    deck = loader.load_deck("biology")
+
+    assert isinstance(deck, Deck)
+    assert len(deck.cards) == 1
+    assert deck.cards[0].question == "What is DNA?"
+    assert deck.cards[0].answer == "Genetic material"
