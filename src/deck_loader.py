@@ -1,9 +1,12 @@
+from pathlib import Path
+
+
 class DeckLoader:
     def __init__(self):
         pass
 
     def create_deck(self, name):
-        pass
+        Path(f"decks/{name}.csv").touch()
 
     def list_decks(self):
         pass
