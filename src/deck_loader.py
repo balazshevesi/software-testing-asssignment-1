@@ -5,25 +5,30 @@ from deck import Deck
 from flashcard import Flashcard
 
 
+DECKS_DIRECTORY = "decks"
+CSV_HEADER = "question,answer\n"
+ENCODING = "utf-8"
+
 class DeckLoader:
     def __init__(self):
         pass
 
     def create_deck(self, name):
-        deck = Path(f"decks/{name}.csv")
+        deck = Path(DECKS_DIRECTORY) / f"{name}.csv"
         if not deck.exists():
-            deck.write_text("question,answer\n")
+            deck.write_text(CSV_HEADER)
 
     def list_decks(self):
         decks = []
-        for deck in Path("decks").glob("*.csv"):
+        for deck in Path(DECKS_DIRECTORY).glob("*.csv"):
             if deck.is_file():
                 decks.append(deck.stem) #`.stem` gives the filename without its extension
         return decks
 
     def load_deck(self, name):
         deck = Deck(name)
-        with Path(f"decks/{name}.csv").open(encoding="utf-8", newline="") as file:
+        path = Path(DECKS_DIRECTORY) / f"{name}.csv"
+        with path.open(encoding=ENCODING, newline="") as file:
             reader = csv.DictReader(file)
             for row in reader:
                 card = Flashcard(row["question"], row["answer"])
@@ -31,7 +36,7 @@ class DeckLoader:
         return deck
 
     def save_deck(self, deck):
-        with Path(f"decks/{deck.name}.csv").open("w", encoding="utf-8", newline="") as file:
+        with Path(f"{DECKS_DIRECTORY}/{deck.name}.csv").open("w", encoding=ENCODING, newline="") as file:
             writer = csv.writer(file)
             writer.writerow(["question", "answer"])
             for card in deck.cards:
