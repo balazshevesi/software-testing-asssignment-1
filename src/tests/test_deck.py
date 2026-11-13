@@ -29,5 +29,3 @@ def test_add_card_to_empty_deck():
     deck.add_card(card)
 
     assert deck.cards == [card]
-
-

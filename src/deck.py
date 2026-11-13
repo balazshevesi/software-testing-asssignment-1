@@ -4,10 +4,10 @@ class Deck:
         self.cards = []
 
     def add_card(self, card):
-        pass
+        self.cards.append(card)
 
     def remove_card(self, card):
-        pass
+        self.cards.remove(card)
 
     def get_due_cards(self, now):
-        pass
+        return [card for card in self.cards if card.is_due(now)]
