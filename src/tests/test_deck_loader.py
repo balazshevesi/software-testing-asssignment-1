@@ -16,3 +16,19 @@ def test_headers_are_present():
 
     # will need to be refactored
     assert Path("decks/software_testing.csv").read_text().startswith("question,answer\n")
+
+# tmp_path, monkeypatch are both provided by Pytest
+def test_list_decks_when_empty(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    Path("decks").mkdir()
+    loader = DeckLoader()
+    assert loader.list_decks() == []
+
+
+def test_list_decks_returns_deck_names(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    Path("decks").mkdir()
+    Path("decks/biology.csv").touch()
+    loader = DeckLoader()
+
+    assert loader.list_decks() == ["biology"]
