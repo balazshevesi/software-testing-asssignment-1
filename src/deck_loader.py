@@ -31,4 +31,8 @@ class DeckLoader:
         return deck
 
     def save_deck(self, deck):
-        pass
+        with Path(f"decks/{deck.name}.csv").open("w", encoding="utf-8", newline="") as file:
+            writer = csv.writer(file)
+            writer.writerow(["question", "answer"])
+            for card in deck.cards:
+                writer.writerow([card.question, card.answer])
