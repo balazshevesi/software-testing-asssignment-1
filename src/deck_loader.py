@@ -13,11 +13,8 @@ class DeckLoader:
     def list_decks(self):
         pass
 
-    def load_deck(self):
+    def load_deck(self, name):
         pass
 
-    def add_flash_card_to_deck(self):
-        pass
-
-    def remove_flash_card_from_deck(self):
+    def save_deck(self, deck):
         pass
