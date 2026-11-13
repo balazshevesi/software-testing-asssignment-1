@@ -11,7 +11,11 @@ class DeckLoader:
             deck.write_text("question,answer\n")
 
     def list_decks(self):
-        pass
+        decks = []
+        for deck in Path("decks").glob("*.csv"):
+            if deck.is_file():
+                decks.append(deck.stem) #`.stem` gives the filename without its extension
+        return decks
 
     def load_deck(self, name):
         pass
