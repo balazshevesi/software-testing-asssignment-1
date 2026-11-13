@@ -1,6 +1,7 @@
 class Deck:
     def __init__(self, name):
-        pass
+        self.name = name
+        self.cards = []
 
     def add_card(self, card):
         pass

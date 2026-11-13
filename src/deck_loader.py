@@ -1,4 +1,8 @@
+import csv
 from pathlib import Path
+
+from deck import Deck
+from flashcard import Flashcard
 
 
 class DeckLoader:
@@ -18,7 +22,13 @@ class DeckLoader:
         return decks
 
     def load_deck(self, name):
-        pass
+        deck = Deck(name)
+        with Path(f"decks/{name}.csv").open(encoding="utf-8", newline="") as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                card = Flashcard(row["question"], row["answer"])
+                deck.cards.append(card)
+        return deck
 
     def save_deck(self, deck):
         pass
