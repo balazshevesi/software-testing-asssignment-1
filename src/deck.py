@@ -8,3 +8,6 @@ class Deck:
 
     def remove_card(self, card):
         pass
+
+    def get_due_cards(self, now):
+        pass

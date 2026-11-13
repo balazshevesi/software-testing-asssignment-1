@@ -35,7 +35,7 @@ class DeckLoader:
                 deck.cards.append(card)
         return deck
 
-    def save_deck(self, deck):
+    def save_deck(self, deck: Deck):
         with Path(f"{DECKS_DIRECTORY}/{deck.name}.csv").open("w", encoding=ENCODING, newline="") as file:
             writer = csv.writer(file)
             writer.writerow(["question", "answer"])
