@@ -6,7 +6,9 @@ class DeckLoader:
         pass
 
     def create_deck(self, name):
-        Path(f"decks/{name}.csv").touch()
+        deck = Path(f"decks/{name}.csv")
+        if not deck.exists():
+            deck.write_text("question,answer\n")
 
     def list_decks(self):
         pass
