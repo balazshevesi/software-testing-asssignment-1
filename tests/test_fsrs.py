@@ -56,3 +56,13 @@ def test_interval_inverse_of_retrievability(fsrs):
 def test_interval_invalid_retention_error(fsrs, retention):
     with pytest.raises(ValueError):
         fsrs.interval(stability=10.0, desired_retention=retention)
+
+@pytest.mark.parametrize("rating, expected", [
+    (Rating.AGAIN, 7.0),   # 5.0 - (1 - 3) * 1.0
+    (Rating.HARD, 6.0),
+    (Rating.GOOD, 5.0),
+    (Rating.EASY, 4.0),
+])
+
+def test_initial_difficulty(fsrs, rating, expected):
+    assert fsrs.initial_difficulty(rating) == pytest.approx(expected)
