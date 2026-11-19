@@ -17,3 +17,9 @@ TEST_weigts = [
 @pytest_fixture
 def fsrs():
     return FsrsAlgorithm(weights=TEST_weigts)
+
+def test_rating_values():
+    assert Rating.AGAIN == 1
+    assert Rating.HARD == 2
+    assert Rating.GOOD == 3
+    assert Rating.EASY == 4
