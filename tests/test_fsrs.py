@@ -31,3 +31,14 @@ def test_mock_weights_used():
 def test_wrong_number_of_weights(weights):
     with pytest.raises(ValueError):
         FsrsAlgorithm(weights=weights)
+
+def test_retrievability_decreases_over_time(fsrs):
+    r1 = fsrs.retrievability(elapsed_days=1, stability=10.0)
+    r5 = fsrs.retrievability(elapsed_days=5, stability=10.0)
+    r30 = fsrs.retrievability(elapsed_days=30, stability=10.0)
+    assert 1.0 > r1 > r5 > r30 > 0.0
+
+def test_higher_stability_means_higher_retrievability(fsrs):
+    low = fsrs.retrievability(elapsed_days=5, stability=2.0)
+    high = fsrs.retrievability(elapsed_days=5, stability=20.0)
+    assert high > low
