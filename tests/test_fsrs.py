@@ -42,3 +42,17 @@ def test_higher_stability_means_higher_retrievability(fsrs):
     low = fsrs.retrievability(elapsed_days=5, stability=2.0)
     high = fsrs.retrievability(elapsed_days=5, stability=20.0)
     assert high > low
+
+def test_interval_known_value(fsrs):
+    # 10 / (19/81) * (0.8 ** -2 - 1) = 23.9802...
+    assert fsrs.interval(stability=10.0, desired_retention=0.8) == pytest.approx(23.9802, rel=1e-4)
+
+def test_interval_inverse_of_retrievability(fsrs):
+    days = fsrs.interval(stability=7.0, desired_retention=0.85)
+    assert fsrs.retrievability(elapsed_days=days, stability=7.0) == pytest.approx(0.85)
+
+# Boundary values: retention must be strictly between 0 and 1.
+@pytest.mark.parametrize("retention", [-0.1, 0.0, 1.0, 1.1])
+def test_interval_invalid_retention_error(fsrs, retention):
+    with pytest.raises(ValueError):
+        fsrs.interval(stability=10.0, desired_retention=retention)
