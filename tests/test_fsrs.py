@@ -1,6 +1,5 @@
 import pytest
 from src.fsrs_algorithm import FsrsAlgorithm, Rating
-from unittest.mock import Mock, create_autospec
 
 # FSRS formulas
 # R(t, s) = (1+ FACTOR * t / S) ** Decay
@@ -24,7 +23,7 @@ def test_rating_values():
     assert Rating.GOOD == 3
     assert Rating.EASY == 4
 
-def test_mock_weights_used():
+def test_injected_weights_are_used(fsrs):
     assert fsrs.weights == TEST_weigts
 
 @pytest.mark.parametrize("weights", [[], [1.0] * 16, [1.0] * 18])
