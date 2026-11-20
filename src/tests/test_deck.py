@@ -29,3 +29,19 @@ def test_add_card_to_empty_deck():
     deck.add_card(card)
 
     assert deck.cards == [card]
+
+
+def test_get_due_cards_returns_only_due_cards():
+    now = datetime(2026, 11, 20, tzinfo=timezone.utc)
+    due_card = Mock(spec=Flashcard)
+    due_card.is_due.return_value = True
+    future_card = Mock(spec=Flashcard)
+    future_card.is_due.return_value = False
+
+    deck = Deck("comp sci")
+    deck.add_card(due_card)
+    deck.add_card(future_card)
+
+    assert deck.get_due_cards(now) == [due_card]
+    due_card.is_due.assert_called_once_with(now)
+    future_card.is_due.assert_called_once_with(now)
