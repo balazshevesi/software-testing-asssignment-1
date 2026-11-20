@@ -4,4 +4,4 @@ class Flashcard:
         self.answer = answer
 
     def is_due(self, now):
-        pass
+        pass 

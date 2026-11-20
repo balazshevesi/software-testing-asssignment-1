@@ -45,3 +45,11 @@ def test_get_due_cards_returns_only_due_cards():
     assert deck.get_due_cards(now) == [due_card]
     due_card.is_due.assert_called_once_with(now)
     future_card.is_due.assert_called_once_with(now)
+
+def test_remove_card():
+    deck = Deck("Advance DSA")
+    card = Flashcard("What is the height of a binary tree?", "How many levels there are to the tree")
+    deck.add_card(card)
+    assert deck.cards == [card]
+    deck.remove_card(card)
+    assert deck.cards == []
