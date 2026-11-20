@@ -10,5 +10,8 @@ dependencies = [
 ]
 
 [tool.pytest.ini_options]
+# `addopts` is **specific to pytest. it adds additional stuff onto the pytest command**
+# run `open htmlcov/index.html` to open the html file
+addopts = "--cov=. --cov-report=term-missing --cov-report=html"
 testpaths = ["tests"]
 pythonpath = ["."]
