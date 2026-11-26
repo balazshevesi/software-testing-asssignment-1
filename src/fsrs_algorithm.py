@@ -11,6 +11,8 @@ FACTOR = 19 / 81
 
 class FsrsAlgorithm:
     def __init__(self, weights) -> None:
+        if len(weights) != 37:
+            raise ValueError("Error wrong number of weights")
         self.weights = weights
 
     # retrievability after days_elapsed since the last review
