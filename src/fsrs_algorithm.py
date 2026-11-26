@@ -11,7 +11,7 @@ FACTOR = 19 / 81
 
 class FsrsAlgorithm:
     def __init__(self, weights) -> None:
-        if len(weights) != 37:
+        if len(weights) != 17:
             raise ValueError("Error wrong number of weights")
         self.weights = weights
 
@@ -20,6 +20,8 @@ class FsrsAlgorithm:
         return (1 + FACTOR * (elapsed_days / stability) ) ** DECAY
 
     def interval(self, stability, desired_retention):
+        if (not 0 < desired_retention < 1):
+            raise ValueError("Error invalid rettention")
         return stability / FACTOR * (desired_retention ** (1 / DECAY) - 1)
 
 class Rating(IntEnum):
