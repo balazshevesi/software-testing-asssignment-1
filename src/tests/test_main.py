@@ -3,8 +3,8 @@ from unittest.mock import Mock, patch
 import pytest
 
 from deck_loader import DeckLoader
+from deck import Deck
 from main import App
-
 
 # asks user to select deck
 #   call loader
@@ -89,9 +89,9 @@ def test_selecting_a_deck_opens_deck_review():
 
 def test_deck_review_displays_selected_deck_name(capsys):
     app = App()
-    app.current_deck = Mock()
-    app.current_deck.name = "Biology"
+    app.current_deck = Mock(spec=Deck)
+    app.current_deck.name = "Testing"
 
     app.page_deck_review()
 
-    assert "Reviewing Biology" in capsys.readouterr().out
+    assert "Reviewing Testing" in capsys.readouterr().out

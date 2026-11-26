@@ -40,6 +40,7 @@ class App:
         for number, name in enumerate(decks, start=1):
             if choice == str(number):
                 self.current_deck = self.loader.load_deck(name)
+                self.current_page = "deck_review"
                 break
 
     def page_deck_editor(self):
