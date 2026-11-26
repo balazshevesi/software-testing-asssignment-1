@@ -85,3 +85,13 @@ def test_selecting_a_deck_opens_deck_review():
         app.page_deck_selector()
 
     assert app.current_page == "deck_review"
+
+
+def test_deck_review_displays_selected_deck_name(capsys):
+    app = App()
+    app.current_deck = Mock()
+    app.current_deck.name = "Biology"
+
+    app.page_deck_review()
+
+    assert "Reviewing Biology" in capsys.readouterr().out
