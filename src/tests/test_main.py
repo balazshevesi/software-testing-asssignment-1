@@ -1,7 +1,8 @@
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import pytest
 
+from deck_loader import DeckLoader
 from main import App
 
 
@@ -35,3 +36,15 @@ def test_router_opens_welcome_page_on_startup():
         app.router()
 
     welcome.assert_called_once_with()
+
+# capsys is a built-in pytest thing that captures text printed to the console
+def test_deck_selector_displays_available_decks(capsys):
+    loader = Mock(spec=DeckLoader)
+    loader.list_decks.return_value = ["Biology", "Swedish"]
+    app = App(loader=loader)
+
+    app.page_deck_selector()
+
+    output = capsys.readouterr().out
+    assert "Biology" in output
+    assert "Swedish" in output
