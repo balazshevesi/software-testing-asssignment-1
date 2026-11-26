@@ -33,8 +33,8 @@ class App:
             self.current_page = "deck_selector"
 
     def page_deck_selector(self):
-        for name in self.loader.list_decks():
-            print(name)
+        for number, name in enumerate(self.loader.list_decks(), start=1):
+            print(f"{number}. {name}")
 
     def page_deck_editor(self):
         pass
