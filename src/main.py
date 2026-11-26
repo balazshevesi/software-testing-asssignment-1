@@ -5,7 +5,9 @@ class App:
         pass
 
     def loop(self):
-        pass
+        keep_going = True
+        while keep_going:
+            self.router()
 
     def router(self):
         pass
