@@ -43,7 +43,8 @@ def test_deck_selector_displays_available_decks(capsys):
     loader.list_decks.return_value = ["Biology", "Swedish"]
     app = App(loader=loader)
 
-    app.page_deck_selector()
+    with patch("builtins.input", return_value="1"):
+        app.page_deck_selector()
 
     output = capsys.readouterr().out
     assert "Biology" in output
@@ -55,7 +56,8 @@ def test_deck_selector_numbers_choices_starting_at_one(capsys):
     loader.list_decks.return_value = ["Biology", "Swedish"]
     app = App(loader=loader)
 
-    app.page_deck_selector()
+    with patch("builtins.input", return_value="1"):
+        app.page_deck_selector()
 
     lines = capsys.readouterr().out.splitlines()
     assert "1. Biology" in lines
