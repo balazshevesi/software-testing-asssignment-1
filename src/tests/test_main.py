@@ -73,3 +73,15 @@ def test_deck_selector_loads_second_deck_when_user_enters_two():
         app.page_deck_selector()
 
     loader.load_deck.assert_called_once_with("Swedish")
+
+
+def test_selecting_a_deck_opens_deck_review():
+    loader = Mock(spec=DeckLoader)
+    loader.list_decks.return_value = ["Biology"]
+    app = App(loader=loader)
+    app.current_page = "deck_selector"
+
+    with patch("builtins.input", return_value="1"):
+        app.page_deck_selector()
+
+    assert app.current_page == "deck_review"
