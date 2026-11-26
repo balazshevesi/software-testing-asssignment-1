@@ -8,6 +8,15 @@ from main import App
 # asks user to select deck
 #   call loader
 
+def test_welcome_selects_deck_selector_when_user_enters_one():
+    app = App()
+
+    with patch("builtins.input", return_value="1"):
+        app.page_welcome()
+
+    assert app.current_page == "deck_selector"
+
+
 def test_loop_keeps_calling_router():
     class StopLoop(Exception): # exceptions interrupts python's loops
         pass
