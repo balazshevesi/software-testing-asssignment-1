@@ -91,6 +91,7 @@ def test_deck_review_displays_selected_deck_name(capsys):
     app = App()
     app.current_deck = Mock(spec=Deck)
     app.current_deck.name = "Testing"
+    app.current_deck.cards = []
 
     app.page_deck_review()
 

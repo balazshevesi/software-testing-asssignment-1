@@ -51,7 +51,12 @@ class App:
         pass
 
     def page_deck_review(self):
+        if self.current_deck is None:
+            self.current_page = "deck_selector"
+            return
         print(f"Reviewing {self.current_deck.name}")
+        if not self.current_deck.cards:
+            self.current_page = "deck_selector"
 
 if __name__ == "__main__":
     app = App()
