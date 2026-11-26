@@ -24,6 +24,9 @@ class FsrsAlgorithm:
             raise ValueError("Error invalid rettention")
         return stability / FACTOR * (desired_retention ** (1 / DECAY) - 1)
 
+    def initial_difficulty(self, rating):
+        return self.weights[4] - (rating - 3) * self.weights[5]
+
 class Rating(IntEnum):
     AGAIN = 1
     HARD = 2
