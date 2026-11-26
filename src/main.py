@@ -1,7 +1,10 @@
+from deck_loader import DeckLoader
+
 
 class App:
-    def __init__(self):
+    def __init__(self, loader=None):
         self.current_page = "welcome"
+        self.loader = DeckLoader() if loader is None else loader
 
     def loop(self):
         keep_going = True
@@ -30,7 +33,8 @@ class App:
             self.current_page = "deck_selector"
 
     def page_deck_selector(self):
-        pass
+        for name in self.loader.list_decks():
+            print(name)
 
     def page_deck_editor(self):
         pass
