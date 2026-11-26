@@ -60,3 +60,14 @@ def test_deck_selector_numbers_choices_starting_at_one(capsys):
     lines = capsys.readouterr().out.splitlines()
     assert "1. Biology" in lines
     assert "2. Swedish" in lines
+
+
+def test_deck_selector_loads_second_deck_when_user_enters_two():
+    loader = Mock(spec=DeckLoader)
+    loader.list_decks.return_value = ["Biology", "Swedish"]
+    app = App(loader=loader)
+
+    with patch("builtins.input", return_value="2"):
+        app.page_deck_selector()
+
+    loader.load_deck.assert_called_once_with("Swedish")
