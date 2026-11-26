@@ -95,3 +95,13 @@ def test_deck_review_displays_selected_deck_name(capsys):
     app.page_deck_review()
 
     assert "Reviewing Testing" in capsys.readouterr().out
+
+
+def test_reviewing_an_empty_deck_returns_to_deck_selector():
+    app = App()
+    app.current_page = "deck_review"
+    app.current_deck = Deck("Biology")
+
+    app.page_deck_review()
+
+    assert app.current_page == "deck_selector"
