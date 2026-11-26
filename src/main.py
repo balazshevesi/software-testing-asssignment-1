@@ -4,6 +4,7 @@ from deck_loader import DeckLoader
 class App:
     def __init__(self, loader=None):
         self.current_page = "welcome"
+        self.current_deck = None
         self.loader = DeckLoader() if loader is None else loader
 
     def loop(self):
@@ -50,7 +51,7 @@ class App:
         pass
 
     def page_deck_review(self):
-        pass
+        print(f"Reviewing {self.current_deck.name}")
 
 if __name__ == "__main__":
     app = App()
