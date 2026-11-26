@@ -25,7 +25,9 @@ class App:
         pass
 
     def page_welcome(self):
-        pass
+        choice = input("Welcome!\n1. Select a deck\nEnter your choice: ")
+        if choice == "1":
+            self.current_page = "deck_selector"
 
     def page_deck_selector(self):
         pass
