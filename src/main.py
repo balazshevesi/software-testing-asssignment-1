@@ -40,3 +40,7 @@ class App:
 
     def page_deck_review(self):
         pass
+
+if __name__ == "__main__":
+    app = App()
+    app.loop()
