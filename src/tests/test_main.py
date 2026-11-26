@@ -48,3 +48,15 @@ def test_deck_selector_displays_available_decks(capsys):
     output = capsys.readouterr().out
     assert "Biology" in output
     assert "Swedish" in output
+
+
+def test_deck_selector_numbers_choices_starting_at_one(capsys):
+    loader = Mock(spec=DeckLoader)
+    loader.list_decks.return_value = ["Biology", "Swedish"]
+    app = App(loader=loader)
+
+    app.page_deck_selector()
+
+    lines = capsys.readouterr().out.splitlines()
+    assert "1. Biology" in lines
+    assert "2. Swedish" in lines
