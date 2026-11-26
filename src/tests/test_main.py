@@ -18,3 +18,11 @@ def test_loop_keeps_calling_router():
             app.loop()
 
     assert router.call_count == 3
+
+def test_router_opens_welcome_page_on_startup():
+    app = App()
+
+    with patch.object(app, "page_welcome") as welcome:
+        app.router()
+
+    welcome.assert_called_once_with()
