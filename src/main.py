@@ -57,6 +57,8 @@ class App:
         print(f"Reviewing {self.current_deck.name}")
         if not self.current_deck.cards:
             self.current_page = "deck_selector"
+        else:
+            print(self.current_deck.cards[0].question)
 
 if __name__ == "__main__":
     app = App()
