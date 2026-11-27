@@ -4,6 +4,7 @@ import pytest
 
 from deck_loader import DeckLoader
 from deck import Deck
+from flashcard import Flashcard
 from main import App
 
 # asks user to select deck
@@ -106,3 +107,14 @@ def test_reviewing_an_empty_deck_returns_to_deck_selector():
     app.page_deck_review()
 
     assert app.current_page == "deck_selector"
+
+
+def test_deck_review_displays_first_card_question(capsys):
+    app = App()
+    deck = Deck("Software Testing")
+    deck.add_card(Flashcard("What is a unit test?", "A test which examines the functionality of the smallest parts of a software system"))
+    app.current_deck = deck
+
+    app.page_deck_review()
+
+    assert "What is a unit test?" in capsys.readouterr().out
